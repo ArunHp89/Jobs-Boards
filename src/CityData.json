@@ -1,0 +1,18 @@
+{
+    "citylist": [
+      { "city": "Moscou" },
+      { "city": "Wuhan" },
+      { "city": "Instambul" },
+      { "city": "New York" },
+      { "city": "London" },
+      { "city": "San Francisco" },
+      { "city": "Bristol" },
+      { "city": "Tokyo" },
+      { "city": "Sydney" },
+      { "city": "Seoul" },
+      { "city": "Shangai" },
+      { "city": "Paris" },
+      { "city": "Marseille" }
+      
+    ]
+  }
