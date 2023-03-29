@@ -5,35 +5,44 @@ import LeftBar from './LeftBar';
 import RightBar from './RightBar';
 import CityData from '../CityData.json'
 export default function JobSearch() {
+
 const [getJobs , setGetJobs]=useState([])  
-const [jobs, setJobs] = useState(getJobs?.length>=1?getJobs:getJobs);
+const [jobs, setJobs] = useState();
 const [comp , setComp]= useState();
 const [cityList , setcityList]= useState(CityData.citylist);
 const [clear , setClear] = useState(false);
-const [city , setcity]= useState();
-const fetchData = () => {
-  return fetch("https://apis.camillerakoto.fr/fakejobs/jobs")
-        .then((response) => response.json())
-        .then((data) => setGetJobs(data));
+
+const fetchData = async () =>  {
+
+    // const data = await  fetch("https://apis.camillerakoto.fr/fakejobs/jobs")
+    //     .then((response) => response.json())
+    //     .then((data) => setGetJobs(data));
+    
+    const response = await fetch('https://apis.camillerakoto.fr/fakejobs/jobs');
+    const data = await response.json();
+        setGetJobs(data)  
+        setJobs(data);
+
 }
 
 useEffect(() => {
   fetchData();
-},[comp , city])
+},[])
 
 const compHandler=(event)=>{
 setComp(event.target.value)
 }
 const ClickHandler = ()=>{
- const filter= jobs.filter(item=>{
-return    item.name.includes(comp)  || item.title.includes(comp) ;
+ const filter= getJobs.filter(item=>{
+return    item.name.includes(comp)  || item.title.includes(comp) || item.city.includes(comp)  ;
   })
   setJobs(filter)
 }
 const CityHandler = (event)=>{
-  setcity(event.target.value);
-  const filter= jobs.filter(item=>{
-    return item?.city==city ;
+
+  // setcity(event.target.value);
+  const filter= getJobs.filter(item=>{
+    return item?.city==event.target.value ;
       })
       setJobs(filter);
 }
@@ -67,7 +76,7 @@ else{
    <Container>
    <div className='flex flex-wrap -mx-4 w-[calc(100% + 32px )]'>
   <LeftBar cityList={cityList} CityHandler={CityHandler} CitySearchHandler={CitySearchHandler} ClearData={ClearData} clear={clear} fullTime={fullTime}/>
- <RightBar jobs={jobs}/>
+ <RightBar getJobs={getJobs} jobs={jobs}/>
    </div>
    </Container>
   </section>
