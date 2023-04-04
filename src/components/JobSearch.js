@@ -4,30 +4,15 @@ import Container from './common-componets/Container';
 import LeftBar from './LeftBar';
 import RightBar from './RightBar';
 import CityData from '../CityData.json'
-export default function JobSearch() {
+import Popup from "./common-componets/Popup";
+export default function JobSearch({getJobs , setGetJobs, setJobs , jobs}) {
 
-const [getJobs , setGetJobs]=useState([])  
-const [jobs, setJobs] = useState();
+
 const [comp , setComp]= useState();
 const [cityList , setcityList]= useState(CityData.citylist);
 const [clear , setClear] = useState(false);
+const [alert , setAlert] =useState(false);
 
-const fetchData = async () =>  {
-
-    // const data = await  fetch("https://apis.camillerakoto.fr/fakejobs/jobs")
-    //     .then((response) => response.json())
-    //     .then((data) => setGetJobs(data));
-    
-    const response = await fetch('https://apis.camillerakoto.fr/fakejobs/jobs');
-    const data = await response.json();
-        setGetJobs(data)  
-        setJobs(data);
-
-}
-
-useEffect(() => {
-  fetchData();
-},[])
 
 const compHandler=(event)=>{
 setComp(event.target.value)
@@ -36,7 +21,15 @@ const ClickHandler = ()=>{
  const filter= getJobs.filter(item=>{
 return    item.name.includes(comp)  || item.title.includes(comp) || item.city.includes(comp)  ;
   })
-  setJobs(filter)
+  if(filter.length>= 1){
+    setJobs(filter);
+  }else{
+    // alert('No job found with' + ' ' + comp + ' ' + 'search' )
+   setAlert(true);
+  }
+  console.log(comp);
+  // setJobs(filter)
+  
 }
 const CityHandler = (event)=>{
 
@@ -45,6 +38,7 @@ const CityHandler = (event)=>{
     return item?.city==event.target.value ;
       })
       setJobs(filter);
+      setComp('')
 }
 const CitySearchHandler = (event)=>{
   const filterCityList = cityList.filter(item=>{
@@ -61,18 +55,18 @@ const ClearData = ()=>{
 const fullTime = (event)=>{
   if(event.target.checked===true){
 const fulltimeFilter = jobs.filter(item=>{
-  return item.fulltime==='true'
+  return (<> {item.fulltime==='true'} {setComp('')}</>)
 })
-return setJobs(fulltimeFilter)
+return setJobs(fulltimeFilter);
 }
 else{
-  return setJobs(getJobs)
+  return setJobs(getJobs);
 }
 
 }
   return (
   <section className='font-Poppins'>
-   <Banner compHandler={compHandler} ClickHandler={ClickHandler}/>
+   <Banner comp={comp} compHandler={compHandler} ClickHandler={ClickHandler} alert={alert} setAlert={setAlert  }/>
    <Container>
    <div className='flex flex-wrap -mx-4 w-[calc(100% + 32px )]'>
   <LeftBar cityList={cityList} CityHandler={CityHandler} CitySearchHandler={CitySearchHandler} ClearData={ClearData} clear={clear} fullTime={fullTime}/>

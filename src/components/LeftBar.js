@@ -2,7 +2,7 @@ import React from 'react'
 import { World } from './common-componets/SvgIcon'
 export default function LeftBar({cityList , CityHandler , CitySearchHandler , clear , ClearData , fullTime}) {
   return (
-    <div className='w-[36%] px-4 relative'>
+    <div className='lg:w-[36%] w-full px-4 relative'>
       <div className='sticky top-8 left-0'>
     <div className='flex items-center mb-8'>
       <input type='checkbox' className='border border-[#B9BDCF] h-[18px] w-[18px]' value='Full time' onClick={fullTime}/>

@@ -1,24 +1,25 @@
 import React from 'react';
-import Comp from './../assests/images/banner.png';
+import { Link } from 'react-router-dom';
 import { Error, World } from './common-componets/SvgIcon';
 export default function RightBar({jobs}) {
   return (
-    <div className='w-[64%] px-4'>
-      {console.log(jobs)}
-      {jobs?.length>=1? jobs?.map((item,index)=>{
+    <div className='lg:w-[64%] w-full px-4 mt-7 lg:mt-0'>
+      {jobs?.length>=1? jobs?.map((item , index)=>{
         return(
-          <div key={index} className='w-full mb-8 '>
-          <div className='w-full flex bg-white shadow-sm p-3 justify-between'>
+          <div key={`${item?.id}`} className='w-full mb-8 '>
+          <div className='w-full flex md:flex-nowrap flex-wrap bg-white shadow-sm p-3 justify-between'>
       <div className='flex'>
-      <img src={item?.logo} className='w-[100px] h-[100px]'/>
+      <Link to={`${item?.id}`}>   <img src={item?.logo} className='w-[100px] h-[100px]'/></Link>
       <div className='px-4 '>
         <span className='text-[#334680] text-xs font-bold mb-[6px]'>{item.name}</span>
-        <h3 className='text-[#334680] text-lg font-normal mb-[18px]'>{item?.title}</h3>
-    {item?.fulltime=='true'?    
-    <a className='text-[#334680] border-[#334680] border rounded text-xs p-[6px] font-bold inline-block hover:text-white hover:bg-[#334680] transition-all' href={item.id}>Full time</a>:null}
+        <Link to={`${item?.id}`}>  <h3 className='text-[#334680] text-lg font-normal mb-[18px]'>{item?.title}</h3></Link>
+    {item?.fulltime=='true'?  
+     <Link to={`${item?.id}`}> 
+    <p className='text-[#334680] border-[#334680] border rounded text-xs p-[6px] font-bold inline-block hover:text-white hover:bg-[#334680] transition-all' >Full time</p> </Link> :null}
+   
       </div>
       </div>
-      <div className='flex items-end'>
+      <div className='flex items-end md:w-auto w-full mt-5 md:mt-0 md:pl-0 pl-28'>
         <div className="inline-flex pr-7">
           <World className="w-4 h-4 fill-[#B9BDCF]"/><p className='text-[#B9BDCF] text-xs mb-0 ml-2'>{item?.city}</p>
         </div>
