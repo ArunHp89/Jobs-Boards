@@ -55,9 +55,10 @@ const ClearData = ()=>{
 const fullTime = (event)=>{
   if(event.target.checked===true){
 const fulltimeFilter = jobs.filter(item=>{
-  return (<> {item.fulltime==='true'} {setComp('')}</>)
+  return item.fulltime==='true';
 })
 return setJobs(fulltimeFilter);
+// return console.log(fulltimeFilter);
 }
 else{
   return setJobs(getJobs);
