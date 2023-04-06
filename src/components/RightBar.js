@@ -9,12 +9,12 @@ export default function RightBar({jobs}) {
           <div key={`${item?.id}`} className='w-full mb-8 '>
           <div className='w-full flex md:flex-nowrap flex-wrap bg-white shadow-sm p-3 justify-between'>
       <div className='flex'>
-      <Link to={`${item?.id}`}>   <img src={item?.logo} className='w-[100px] h-[100px]'/></Link>
+      <Link to={`${item?.name}`}>   <img src={item?.logo} className='w-[100px] h-[100px]'/></Link>
       <div className='px-4 '>
         <span className='text-[#334680] text-xs font-bold mb-[6px]'>{item.name}</span>
-        <Link to={`${item?.id}`}>  <h3 className='text-[#334680] text-lg font-normal mb-[18px]'>{item?.title}</h3></Link>
+        <Link to={`${item?.name}`}>  <h3 className='text-[#334680] text-lg font-normal mb-[18px]'>{item?.title}</h3></Link>
     {item?.fulltime=='true'?  
-     <Link to={`${item?.id}`}> 
+     <Link to={`${item?.name}`}> 
     <p className='text-[#334680] border-[#334680] border rounded text-xs p-[6px] font-bold inline-block hover:text-white hover:bg-[#334680] transition-all' >Full time</p> </Link> :null}
    
       </div>

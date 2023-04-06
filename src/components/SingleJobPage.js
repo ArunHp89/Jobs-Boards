@@ -5,13 +5,13 @@ import SingleLeft from './SingleLeft';
 import SingleRight from './SingleRight';
 
 export default function jobsPage({getJobs , setJobs ,jobs}) {
-const indexvalue = window.location.pathname.replace('/', '');
+const companyName = window.location.pathname.replace('/', '');
 
 const singleProduct = getJobs.filter((item, index)=>{
-  if(item.id== indexvalue){
+  if(item.name== companyName){
     return setJobs(item);
   }
-return item.id== indexvalue;
+return item.id== companyName;
 });
   return (
     <div className='flex flex-wrap -mx-4 w-[calc(100% + 32px )]'>
