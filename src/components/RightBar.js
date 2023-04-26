@@ -1,7 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Error, World } from './common-componets/SvgIcon';
+import moment from 'moment';
+
 export default function RightBar({jobs}) {
+  const convert = (inputDate) => {
+    let date = new Date(inputDate);   
+
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    return year + '.' + month + '.' + day;
+  }
   return (
     <div className='lg:w-[64%] w-full px-4 mt-7 lg:mt-0'>
       {jobs?.length>=1? jobs?.map((item , index)=>{
@@ -24,7 +35,9 @@ export default function RightBar({jobs}) {
           <World className="w-4 h-4 fill-[#B9BDCF]"/><p className='text-[#B9BDCF] text-xs mb-0 ml-2'>{item?.city}</p>
         </div>
         <div className="inline-flex">
-          <World className="w-4 h-4 fill-[#B9BDCF]"/><p className='text-[#B9BDCF] text-xs mb-0 ml-2'>5 days ago</p>
+          <World className="w-4 h-4 fill-[#B9BDCF]"/><p className='text-[#B9BDCF] text-xs mb-0 ml-2'>
+          {moment(new Date(item?.date)).fromNow()}
+          </p>
         </div>
       </div>
           </div>

@@ -17,7 +17,7 @@ export default function LeftBar({cityList , CityHandler , CitySearchHandler , cl
       </div>
       <div className='px-[14px]'>
         {clear===true?<div className='text-right'><button className='text-red-600 border-red-600 border rounded text-xs p-[6px] font-bold inline-block hover:text-white hover:bg-red-600 transition-all' onClick={ClearData}>Clear</button></div>:null}
-        {cityList?.map((item , index)=>{
+        {cityList.slice(0, 3)?.map((item , index)=>{
           return (
             <div key={index} className='flex items-center mb-4'>
 <input onClick={CityHandler} type="radio" id={item.city} name="city" className='w-[18px] h-[18px] border-[#B9BDCF]' defaultValue={item.city} />
